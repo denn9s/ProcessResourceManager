@@ -14,18 +14,18 @@ public class Shell {
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
                 String command = scanner.next();
-                if (command == "cr") {
+                if (command.equals("cr")) {
                     String processName = scanner.next();
                     int priority = Integer.parseInt(scanner.next());
-                } else if (command == "de") {
+                } else if (command.equals("de")) {
                     String processName = scanner.next();
-                } else if (command == "req") {
+                } else if (command.equals("req")) {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
-                } else if (command == "rel") {
+                } else if (command.equals("rel")) {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
-                } else if (command == "to") {
+                } else if (command.equals("to")) {
 
                 } else {
                     
