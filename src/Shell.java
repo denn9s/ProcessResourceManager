@@ -43,7 +43,8 @@ public class Shell {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
                 } else if (command.equals("to")) {
-
+                    priorityList.createProcess(currentProcess);
+                    currentProcess = priorityList.nextProcess();
                 } else {
                     
                 }
