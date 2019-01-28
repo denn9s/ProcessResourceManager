@@ -4,8 +4,8 @@ public class Resource {
     int maxUnits;
 
     public Resource(String rid, Integer units) {
-        resourceID = rid;
-        freeUnits = units;
-        maxUnits = units;
+        this.resourceID = rid;
+        this.freeUnits = units;
+        this.maxUnits = units;
     }
 }
