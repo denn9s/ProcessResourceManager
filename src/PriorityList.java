@@ -49,6 +49,8 @@ public class PriorityList {
             return userProcesses.size();
         } else if (priority == 2) {
             return systemProcesses.size();
+        } else {
+            return -1;
         }
     }
 }
