@@ -14,7 +14,9 @@ public class Shell {
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
                 String command = scanner.next();
-                if (command.equals("cr")) {
+                if (command.equals("init")) {
+
+                } else if (command.equals("cr")) {
                     String processName = scanner.next();
                     int priority = Integer.parseInt(scanner.next());
                     if (priority == 1 || priority == 2) {
