@@ -22,4 +22,8 @@ public class Process {
     public int getPriority() {
         return this.priority;
     }
+
+    public String getPID() {
+        return this.processID;
+    }
 }
