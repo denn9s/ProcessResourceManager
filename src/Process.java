@@ -26,4 +26,8 @@ public class Process {
     public String getPID() {
         return this.processID;
     }
+
+    public void addChild(Process process) {
+        creationTreeChildren.add(process);
+    }
 }
