@@ -10,4 +10,18 @@ public class ResourceList {
         thirdResource = new Resource("R3", 3);
         fourthResource = new Resource("R4", 4);
     }
+
+    public Resource getResource(String rid) {
+        if (rid.equals("R1")) {
+            return firstResource;
+        } else if (rid.equals("R2")) {
+            return secondResource;
+        } else if (rid.equals("R3")) {
+            return thirdResource;
+        } else if (rid.equals("R4")) {
+            return fourthResource;
+        } else {
+            return null;
+        }
+    }
 }
