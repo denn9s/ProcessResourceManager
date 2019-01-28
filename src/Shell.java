@@ -17,6 +17,23 @@ public class Shell {
                 if (command.equals("cr")) {
                     String processName = scanner.next();
                     int priority = Integer.parseInt(scanner.next());
+                    if (priority == 1 || priority == 2) {
+                        if (processMap.containsKey(processName) == false) {
+                            Process process = new Process(processName, currentProcess, priority, priorityList.getSize(priority));
+                            priorityList.createProcess(process);
+                            processMap.put(process.getPID(), process);
+                            currentProcess.addChild(process);
+                            if (priority > currentProcess.priority) {
+                                priorityList.createProcess(currentProcess);
+                                currentProcess = priorityList.nextProcess();
+                            }
+                        }
+                        else {
+                            // error
+                        }
+                    } else {
+                        // error
+                    }
                 } else if (command.equals("de")) {
                     String processName = scanner.next();
                 } else if (command.equals("req")) {
