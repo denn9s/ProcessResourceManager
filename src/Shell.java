@@ -15,7 +15,8 @@ public class Shell {
             while (scanner.hasNextLine()) {
                 String command = scanner.next();
                 if (command.equals("init")) {
-
+                    currentProcess = priorityList.nextProcess();
+                    priorityList = new PriorityList();
                 } else if (command.equals("cr")) {
                     String processName = scanner.next();
                     int priority = Integer.parseInt(scanner.next());
