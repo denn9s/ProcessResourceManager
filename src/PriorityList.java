@@ -31,11 +31,11 @@ public class PriorityList {
     }
 
     public Process nextProcess() {
-        if (systemProcesses.size() == 0) {
+        if (systemProcesses.size() > 0) {
             Process systemProcess = systemProcesses.get(0);
             systemProcesses.remove(0);
             return systemProcess;
-        } else if (userProcesses.size() == 0) {
+        } else if (userProcesses.size() > 0) {
             Process userProcess = userProcesses.get(0);
             userProcesses.remove(0);
             return userProcess;
