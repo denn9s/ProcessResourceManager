@@ -11,4 +11,22 @@ public class PriorityList {
         userProcesses = new ArrayList<Process>();
         systemProcesses = new ArrayList<Process>();
     }
+
+    public void createProcess(Process process) {
+        if (process.getPriority() == 0) {
+            initProcess = process;
+        } else if (process.getPriority() == 1) {
+            userProcesses.add(process);
+        } else if (process.getPriority() == 2) {
+            systemProcesses.add(process);
+        }
+    }
+
+    public void removeProcess(Process process) {
+        if (process.getPriority() == 1) {
+            userProcesses.remove(process);
+        } else if (process.getPriority() == 2) {
+            systemProcesses.remove(process);
+        }
+    }
 }
