@@ -53,4 +53,8 @@ public class PriorityList {
             return -1;
         }
     }
+
+    public Process getInitProcess() {
+        return this.initProcess;
+    }
 }
