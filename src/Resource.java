@@ -20,6 +20,19 @@ public class Resource {
         this.processRequestMap = new HashMap<Process, Integer>();
     }
 
+    public boolean request(Process process, int units) {
+        if (units <= this.freeUnits) {
+            this.freeUnits = this.freeUnits - units;
+            processList.add(process);
+            processUnitMap.put(process, units);
+            return true;
+        } else {
+            waitingList.add(process);
+            processRequestMap.put(process, units);
+            return false;
+        }
+    }
+
     public int getFreeUnits() {
         return this.freeUnits;
     }
