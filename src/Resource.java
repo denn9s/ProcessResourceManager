@@ -33,6 +33,22 @@ public class Resource {
         }
     }
 
+    public boolean release(Process process, int units) {
+        if (processUnitMap.containsKey(process)) {
+            int totalUsedUnits = processUnitMap.get(process);
+            if (units == totalUsedUnits && processList.remove(process) == true) {
+                this.freeUnits = this.freeUnits + processUnitMap.remove(process);
+            } else {
+                processUnitMap.replace(process, totalUsedUnits - units);
+                totalUsedUnits = units;
+                freeUnits = freeUnits + totalUsedUnits;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int getFreeUnits() {
         return this.freeUnits;
     }
