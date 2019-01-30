@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class Process {
     String processID;
-    ArrayList<Integer> otherResources;
+    ArrayList<String> otherResources;
     int priority;
     Process creationTreeParent;
     ArrayList<Process> creationTreeChildren;
 
     public Process(String pid, Process parent, int priority, int index) {
         this.processID = pid;
-        this.otherResources = new ArrayList<Integer>();
+        this.otherResources = new ArrayList<String>();
         this.priority = priority;
         if (parent == null) {
             this.creationTreeParent = this;
@@ -29,5 +29,13 @@ public class Process {
 
     public void addChild(Process process) {
         creationTreeChildren.add(process);
+    }
+
+    public void addResource(String resourceID) {
+        otherResources.add(resourceID);
+    }
+
+    public void removeResource(String resourceID) {
+        otherResources.remove(resourceID);
     }
 }
