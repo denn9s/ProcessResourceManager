@@ -15,7 +15,6 @@ public class Shell {
         try {
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
-
                 String command = scanner.next();
                 /*
                 INIT COMMAND
@@ -64,6 +63,7 @@ public class Shell {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
                     currentResource = resourceList.getResource(resourceName);
+                    boolean requestSuccess = false;
                     if (currentResource != null) {
                         if (unitCount > 0) {
                             if (unitCount <= currentResource.getFreeUnits()) {
@@ -72,12 +72,15 @@ public class Shell {
                                     if (success == false) {
                                         priorityList.removeProcess(currentProcess);
                                         currentProcess = priorityList.nextProcess();
+                                    } else {
+                                        requestSuccess = true;
                                     }
                                 }
                             }
                         }
-                    } else {
-                        System.out.println("error"); // error
+                    }
+                    if (requestSuccess == false) {
+                        System.out.println("error");
                     }
                 }
                 /*
