@@ -7,17 +7,27 @@ public class Shell {
     public static void main(String[] args) {
         File inputFile = new File("input.txt");
         PriorityList priorityList = new PriorityList();
+        ResourceList resourceList = new ResourceList();
         Process currentProcess = priorityList.nextProcess();
+        Resource currentResource;
         HashMap<String, Process> processMap = new HashMap<String, Process>();
         processMap.put(currentProcess.getPID(), currentProcess);
         try {
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
                 String command = scanner.next();
+                /*
+                INIT COMMAND
+                 */
                 if (command.equals("init")) {
                     currentProcess = priorityList.nextProcess();
                     priorityList = new PriorityList();
-                } else if (command.equals("cr")) {
+                }
+
+                /*
+                CR (CREATE) COMMAND
+                 */
+                else if (command.equals("cr")) {
                     String processName = scanner.next();
                     int priority = Integer.parseInt(scanner.next());
                     if (priority == 1 || priority == 2) {
@@ -37,18 +47,57 @@ public class Shell {
                     } else {
                         // error
                     }
-                } else if (command.equals("de")) {
+                }
+                /*
+                DE (DESTROY) COMMAND
+                 */
+                else if (command.equals("de")) {
                     String processName = scanner.next();
-                } else if (command.equals("req")) {
+                }
+
+                /*
+                REQ (REQUEST) COMMAND
+                 */
+                else if (command.equals("req")) {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
-                } else if (command.equals("rel")) {
+                    currentResource = resourceList.getResource(resourceName);
+                    if (currentResource != null) {
+                        if (unitCount > 0) {
+                            if (unitCount <= currentResource.getFreeUnits()) {
+                                if (!currentProcess.equals(priorityList.getInitProcess())) {
+                                    boolean success = currentResource.request(currentProcess, unitCount)
+                                    if (success == false) {
+                                        priorityList.removeProcess(currentProcess);
+                                        currentProcess = priorityList.nextProcess();
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // error
+                    }
+                }
+                /*
+                REL (RELEASE) COMMAND
+                 */
+                else if (command.equals("rel")) {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
-                } else if (command.equals("to")) {
+                }
+
+                /*
+                TO (TIMEOUT) COMMAND
+                 */
+                else if (command.equals("to")) {
                     priorityList.createProcess(currentProcess);
                     currentProcess = priorityList.nextProcess();
-                } else {
+                }
+
+                /*
+                OTHER ERRORS
+                 */
+                else {
                     
                 }
             }
