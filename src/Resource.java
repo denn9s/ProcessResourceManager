@@ -49,6 +49,21 @@ public class Resource {
         }
     }
 
+    public Process unblock() {
+        if (waitingList.isEmpty() == false) {
+            int currentUnits = processUnitMap.get(waitingList.get(0));
+            if (currentUnits <= freeUnits) {
+                Process process = waitingList.remove(0);
+                processList.add(process);
+                processUnitMap.put(process, currentUnits);
+                processRequestMap.remove(process);
+                freeUnits = freeUnits - currentUnits;
+                return process;
+            }
+        }
+        return null;
+    }
+
     public int getFreeUnits() {
         return this.freeUnits;
     }
