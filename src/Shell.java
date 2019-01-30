@@ -66,7 +66,7 @@ public class Shell {
                         if (unitCount > 0) {
                             if (unitCount <= currentResource.getFreeUnits()) {
                                 if (!currentProcess.equals(priorityList.getInitProcess())) {
-                                    boolean success = currentResource.request(currentProcess, unitCount)
+                                    boolean success = currentResource.request(currentProcess, unitCount);
                                     if (success == false) {
                                         priorityList.removeProcess(currentProcess);
                                         currentProcess = priorityList.nextProcess();
@@ -75,7 +75,7 @@ public class Shell {
                             }
                         }
                     } else {
-                        // error
+                        System.out.println("error"); // error
                     }
                 }
                 /*

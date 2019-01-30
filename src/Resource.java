@@ -14,8 +14,8 @@ public class Resource {
         this.resourceID = rid;
         this.freeUnits = units;
         this.maxUnits = units;
-        this.processList = new ArrayList<Process>;
-        this.waitingList = new ArrayList<Process>;
+        this.processList = new ArrayList<Process>();
+        this.waitingList = new ArrayList<Process>();
         this.processUnitMap = new HashMap<Process, Integer>();
         this.processRequestMap = new HashMap<Process, Integer>();
     }
