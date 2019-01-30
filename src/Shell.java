@@ -15,6 +15,7 @@ public class Shell {
         try {
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
+
                 String command = scanner.next();
                 /*
                 INIT COMMAND
@@ -22,6 +23,7 @@ public class Shell {
                 if (command.equals("init")) {
                     currentProcess = priorityList.nextProcess();
                     priorityList = new PriorityList();
+                    resourceList = new ResourceList();
                 }
 
                 /*
@@ -42,10 +44,10 @@ public class Shell {
                             }
                         }
                         else {
-                            // error
+                            System.out.println("error"); // error
                         }
                     } else {
-                        // error
+                        System.out.println("error"); // error
                     }
                 }
                 /*
