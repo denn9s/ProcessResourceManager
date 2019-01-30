@@ -15,6 +15,12 @@ public class Shell {
         try {
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
+                if (priorityList.getSize(1) == 0) {
+                    if (priorityList.getSize(2) == 0) {
+                        break;
+                    }
+                }
+
                 String command = scanner.next();
                 /*
                 INIT COMMAND
@@ -103,7 +109,7 @@ public class Shell {
                 OTHER ERRORS
                  */
                 else {
-                    
+
                 }
             }
         } catch (FileNotFoundException e) {
