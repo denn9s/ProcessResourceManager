@@ -19,16 +19,47 @@ public class Process {
         this.creationTreeChildren = new ArrayList<Process>();
     }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
     public int getPriority() {
         return this.priority;
+    }
+
+    public void setPID(String pid) {
+        this.processID = pid;
     }
 
     public String getPID() {
         return this.processID;
     }
 
+    public ArrayList<Process> getCreationTreeChildren() {
+        return creationTreeChildren;
+    }
+
     public void addChild(Process process) {
         creationTreeChildren.add(process);
+    }
+
+    public void removeChild(Process process) {
+        if (process == null) {
+            // may need to return
+        } else {
+            if (creationTreeChildren.remove(process) == true) {
+
+            } else {
+                ArrayList<Process> newChildren = new ArrayList<Process>();
+                newChildren.addAll(creationTreeChildren);
+                for (Process child : newChildren) {
+                    newChildren.addAll(child.getCreationTreeChildren());
+                }
+                if (newChildren.contains(process)) {
+                    // may need to return
+                }
+            }
+        }
     }
 
     public void addResource(String resourceID) {
