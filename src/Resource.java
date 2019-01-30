@@ -8,4 +8,12 @@ public class Resource {
         this.freeUnits = units;
         this.maxUnits = units;
     }
+
+    public int getFreeUnits() {
+        return this.freeUnits;
+    }
+
+    public int getMaxUnits() {
+        return this.maxUnits;
+    }
 }
