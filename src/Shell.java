@@ -95,7 +95,6 @@ public class Shell {
                 else if (command.equals("rel")) {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
-
                 }
 
                 /*
