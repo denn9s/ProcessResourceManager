@@ -1,7 +1,14 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Resource {
     String resourceID;
-    int freeUnits;
-    int maxUnits;
+    int freeUnits; // u
+    int maxUnits; // k
+    ArrayList<Process> processList;
+    ArrayList<Process> waitingList;
+    HashMap<Process, Integer> processUnitMap;
+    HashMap<Process, Integer> processRequestMap;
 
     public Resource(String rid, Integer units) {
         this.resourceID = rid;
