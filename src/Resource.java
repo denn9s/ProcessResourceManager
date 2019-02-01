@@ -64,11 +64,31 @@ public class Resource {
         return null;
     }
 
+    public String getResourceID() {
+        return this.resourceID;
+    }
+
     public int getFreeUnits() {
         return this.freeUnits;
     }
 
     public int getMaxUnits() {
         return this.maxUnits;
+    }
+
+    public ArrayList<Process> getProcessList() {
+        return this.processList;
+    }
+
+    public ArrayList<Process> getWaitingList() {
+        return this.waitingList;
+    }
+
+    public HashMap<Process, Integer> getProcessUnitMap() {
+        return this.processUnitMap;
+    }
+
+    public HashMap<Process, Integer> getProcessRequestMap() {
+        return this.processRequestMap;
     }
 }
