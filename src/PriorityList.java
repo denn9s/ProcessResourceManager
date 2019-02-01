@@ -54,6 +54,16 @@ public class PriorityList {
         }
     }
 
+    public int getCurrentPriority() {
+        if (systemProcesses.isEmpty() == true) {
+            if (userProcesses.isEmpty() == true) {
+                return 0;
+            }
+            return 1;
+        }
+        return 2;
+    }
+
     public Process getInitProcess() {
         return this.initProcess;
     }
