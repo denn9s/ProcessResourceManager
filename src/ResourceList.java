@@ -24,4 +24,18 @@ public class ResourceList {
             return null;
         }
     }
+
+    public Process unblockProcess() {
+        Process process = this.firstResource.unblock();
+        if (process == null) {
+            process = this.secondResource.unblock();
+            if (process == null) {
+                process = this.thirdResource.unblock();
+                if (process == null) {
+                    process = this.fourthResource.unblock();
+                }
+            }
+        }
+        return process;
+    }
 }
