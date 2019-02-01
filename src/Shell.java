@@ -9,6 +9,7 @@ public class Shell {
         PriorityList priorityList = new PriorityList();
         ResourceList resourceList = new ResourceList();
         Process currentProcess = priorityList.nextProcess();
+        Process availableProcess;
         Resource currentResource;
         HashMap<String, Process> processMap = new HashMap<String, Process>();
         processMap.put(currentProcess.getPID(), currentProcess);
@@ -95,6 +96,38 @@ public class Shell {
                 else if (command.equals("rel")) {
                     String resourceName = scanner.next();
                     int unitCount = Integer.parseInt(scanner.next());
+                    currentResource = resourceList.getResource(resourceName);
+                    boolean releaseSuccess = false;
+                    if (currentProcess != null) {
+                        if (unitCount > 0) {
+                            if (unitCount <= currentResource.getMaxUnits()) {
+                                if (unitCount <= currentResource.getProcessUnitMap().get(currentProcess)) {
+                                    if (!currentProcess.equals(priorityList.getInitProcess())) {
+                                        if (currentResource.getProcessUnitMap().containsKey(currentProcess)) {
+                                            boolean success = currentResource.release(currentProcess, unitCount);
+                                            availableProcess = resourceList.unblockProcess();
+                                            while (true) {
+                                                if (availableProcess == null) {
+                                                    break;
+                                                } else {
+                                                    priorityList.createProcess(availableProcess);
+                                                    availableProcess = resourceList.unblockProcess();
+                                                }
+                                            }
+                                            if (currentProcess.getPriority() < priorityList.getCurrentPriority()) {
+                                                priorityList.createProcess(currentProcess);
+                                                currentProcess = priorityList.nextProcess();
+                                            }
+                                            releaseSuccess = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (releaseSuccess == false) {
+                        System.out.println("error");
+                    }
                 }
 
                 /*
