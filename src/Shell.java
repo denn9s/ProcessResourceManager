@@ -72,7 +72,7 @@ public class Shell {
                     boolean requestSuccess = false;
                     if (currentResource != null) {
                         if (unitCount > 0) {
-                            if (unitCount <= currentResource.getFreeUnits()) {
+                            if (unitCount <= currentResource.getMaxUnits()) {
                                 if (!currentProcess.equals(priorityList.getInitProcess())) {
                                     boolean success = currentResource.request(currentProcess, unitCount);
                                     if (success == false) {
