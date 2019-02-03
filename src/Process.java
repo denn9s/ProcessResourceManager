@@ -43,12 +43,12 @@ public class Process {
         creationTreeChildren.add(process);
     }
 
-    public void removeChild(Process process) {
+    public Process removeChild(Process process) {
         if (process == null) {
-            // may need to return
+            return null;
         } else {
             if (creationTreeChildren.remove(process) == true) {
-
+                return process;
             } else {
                 ArrayList<Process> newChildren = new ArrayList<Process>();
                 newChildren.addAll(creationTreeChildren);
@@ -56,7 +56,7 @@ public class Process {
                     newChildren.addAll(child.getCreationTreeChildren());
                 }
                 if (newChildren.contains(process)) {
-                    // may need to return
+                    return process;
                 }
             }
         }
