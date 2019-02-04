@@ -23,12 +23,12 @@ public class Resource {
     public boolean request(Process process, int units) {
         if (units <= this.freeUnits) {
             this.freeUnits = this.freeUnits - units;
-            processList.add(process);
-            processUnitMap.put(process, units);
+            this.processList.add(process);
+            this.processUnitMap.put(process, units);
             return true;
         } else {
-            waitingList.add(process);
-            processRequestMap.put(process, units);
+            this.waitingList.add(process);
+            this.processRequestMap.put(process, units);
             return false;
         }
     }
