@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ResourceList {
     Resource firstResource;
     Resource secondResource;
@@ -37,5 +39,12 @@ public class ResourceList {
             }
         }
         return process;
+    }
+
+    public void remove(ArrayList<Process> processList) {
+        this.firstResource.clear(processList);
+        this.secondResource.clear(processList);
+        this.thirdResource.clear(processList);
+        this.fourthResource.clear(processList);
     }
 }
