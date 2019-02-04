@@ -51,7 +51,7 @@ public class Resource {
 
     public Process unblock() {
         if (waitingList.isEmpty() == false) {
-            int currentUnits = processUnitMap.get(waitingList.get(0));
+            int currentUnits = processRequestMap.get(waitingList.get(0));
             if (currentUnits <= freeUnits) {
                 Process process = waitingList.remove(0);
                 processList.add(process);
