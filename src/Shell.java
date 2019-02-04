@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -61,6 +62,39 @@ public class Shell {
                  */
                 else if (command.equals("de")) {
                     String processName = scanner.next();
+                    Process process = processMap.get(processName);
+                    if (process != null) {
+                        if (process.equals(currentProcess) == false) {
+                            process = currentProcess.removeChild(process);
+                        }
+                    }
+
+                    if (process != null) {
+                        if (process.equals(priorityList.getInitProcess()) == false) {
+                            processMap.remove(processName);
+                            process.creationTreeParent.removeChild(process);
+                            priorityList.removeProcess(process);
+                            ArrayList<Process> children = process.getCreationTreeChildren();
+                            children.add(process);
+                            resourceList.remove(children);
+                            availableProcess = resourceList.unblockProcess();
+                            for (Process child : children) {
+                                processMap.remove(child.getPID());
+                            }
+                            while (availableProcess != null) {
+                                priorityList.createProcess(availableProcess);
+                                availableProcess = resourceList.unblockProcess();
+                            }
+                            if (processMap.containsKey(currentProcess.getPID()) == false) {
+                                currentProcess = priorityList.nextProcess();
+                            } else if (currentProcess.getPriority() < priorityList.getCurrentPriority()) {
+                                currentProcess = priorityList.nextProcess();
+                            }
+
+                        }
+                    } else {
+                        System.out.println("error");
+                    }
                 }
 
                 /*
