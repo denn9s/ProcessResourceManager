@@ -52,9 +52,13 @@ public class Process {
             } else {
                 ArrayList<Process> newChildren = new ArrayList<Process>();
                 newChildren.addAll(creationTreeChildren);
-                for (Process child : newChildren) {
-                    newChildren.addAll(child.getCreationTreeChildren());
+                for (int i = 0; i < newChildren.size(); i++) {
+                    newChildren.addAll(newChildren.get(i).getCreationTreeChildren());
                 }
+                // kept throwing ConcurrentModificationException
+                // for (Process child : newChildren) {
+                //     newChildren.addAll(child.getCreationTreeChildren());
+                // }
                 if (newChildren.contains(process)) {
                     return process;
                 }
