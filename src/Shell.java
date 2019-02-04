@@ -15,14 +15,9 @@ public class Shell {
         HashMap<String, Process> processMap = new HashMap<String, Process>();
         processMap.put(currentProcess.getPID(), currentProcess);
         try {
+
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
-                if (priorityList.getSize(1) == 0) {
-                    if (priorityList.getSize(2) == 0) {
-                        break;
-                    }
-                }
-
                 String command = scanner.next();
                 /*
                 INIT COMMAND
