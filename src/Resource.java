@@ -64,6 +64,18 @@ public class Resource {
         return null;
     }
 
+    public void clear(ArrayList<Process> processList) {
+        for (Process process : processList) {
+            Integer unitCount = this.processUnitMap.remove(process);
+            if (unitCount != null) {
+                this.freeUnits = this.freeUnits + unitCount;
+            }
+            processRequestMap.remove(process);
+        }
+        this.processList.removeAll(processList);
+        this.waitingList.removeAll(processList);
+    }
+
     public String getResourceID() {
         return this.resourceID;
     }
