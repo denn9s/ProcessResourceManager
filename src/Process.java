@@ -60,6 +60,7 @@ public class Process {
                 }
             }
         }
+        return null;
     }
 
     public void addResource(String resourceID) {
