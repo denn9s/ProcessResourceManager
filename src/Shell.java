@@ -19,6 +19,7 @@ public class Shell {
 
             Scanner scanner = new Scanner(inputFile);
             while (scanner.hasNextLine()) {
+                foundError = false;
                 String command = scanner.next();
                 /*
                 INIT COMMAND
