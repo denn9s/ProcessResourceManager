@@ -14,6 +14,7 @@ public class Shell {
         Resource currentResource;
         HashMap<String, Process> processMap = new HashMap<String, Process>();
         processMap.put(currentProcess.getPID(), currentProcess);
+        boolean foundError = false;
         try {
 
             Scanner scanner = new Scanner(inputFile);
@@ -40,15 +41,17 @@ public class Shell {
                             priorityList.createProcess(process);
                             processMap.put(process.getPID(), process);
                             currentProcess.addChild(process);
-                            if (priority > currentProcess.priority) {
+                            if (priority > currentProcess.getPriority()) {
                                 priorityList.createProcess(currentProcess);
                                 currentProcess = priorityList.nextProcess();
                             }
                         }
                         else {
+                            foundError = true;
                             System.out.println("error"); // error
                         }
                     } else {
+                        foundError = true;
                         System.out.println("error"); // error
                     }
                 }
@@ -88,6 +91,7 @@ public class Shell {
 
                         }
                     } else {
+                        foundError = true;
                         System.out.println("error");
                     }
                 }
@@ -104,18 +108,18 @@ public class Shell {
                         if (unitCount > 0) {
                             if (unitCount <= currentResource.getMaxUnits()) {
                                 if (!currentProcess.equals(priorityList.getInitProcess())) {
+                                    requestSuccess = true;
                                     boolean success = currentResource.request(currentProcess, unitCount);
                                     if (success == false) {
                                         priorityList.removeProcess(currentProcess);
                                         currentProcess = priorityList.nextProcess();
-                                    } else {
-                                        requestSuccess = true;
                                     }
                                 }
                             }
                         }
                     }
                     if (requestSuccess == false) {
+                        foundError = true;
                         System.out.println("error");
                     }
                 }
@@ -155,7 +159,6 @@ public class Shell {
                         }
                     }
                     if (releaseSuccess == false) {
-                        System.out.println("error");
                     }
                 }
 
@@ -163,15 +166,25 @@ public class Shell {
                 TO (TIMEOUT) COMMAND
                  */
                 else if (command.equals("to")) {
-                    priorityList.createProcess(currentProcess);
-                    currentProcess = priorityList.nextProcess();
+                    if (currentProcess == null) {
+                        foundError = true;
+                        System.out.println("error");
+                    } else {
+                        priorityList.createProcess(currentProcess);
+                        currentProcess = priorityList.nextProcess();
+                    }
                 }
 
                 /*
                 OTHER ERRORS
                  */
                 else {
+                    foundError = true;
+                    System.out.println("other error");
+                }
 
+                if (foundError == false) {
+                    System.out.println(currentProcess.getPID());
                 }
             }
         } catch (FileNotFoundException e) {
