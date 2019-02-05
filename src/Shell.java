@@ -21,7 +21,7 @@ public class Shell {
         Process currentProcess = priorityList.nextProcess();
         Process availableProcess;
         Resource currentResource;
-        HashMap<String, Process> processMap = new HashMap<String, Process>();
+        HashMap<String, Process> processMap = new HashMap<>();
         processMap.put(currentProcess.getPID(), currentProcess);
         boolean foundError = false;
         boolean newSet = false;

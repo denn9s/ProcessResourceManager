@@ -9,14 +9,14 @@ public class Process {
 
     public Process(String pid, Process parent, int priority, int index) {
         this.processID = pid;
-        this.otherResources = new ArrayList<String>();
+        this.otherResources = new ArrayList<>();
         this.priority = priority;
         if (parent == null) {
             this.creationTreeParent = this;
         } else {
             this.creationTreeParent = parent;
         }
-        this.creationTreeChildren = new ArrayList<Process>();
+        this.creationTreeChildren = new ArrayList<>();
     }
 
     public void setPriority(int priority) {
@@ -50,7 +50,7 @@ public class Process {
             if (creationTreeChildren.remove(process) == true) {
                 return process;
             } else {
-                ArrayList<Process> newChildren = new ArrayList<Process>();
+                ArrayList<Process> newChildren = new ArrayList<>();
                 newChildren.addAll(creationTreeChildren);
                 for (int i = 0; i < newChildren.size(); i++) {
                     newChildren.addAll(newChildren.get(i).getCreationTreeChildren());

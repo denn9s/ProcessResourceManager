@@ -8,8 +8,8 @@ public class PriorityList {
 
     public PriorityList() {
         initProcess = new Process("init", null, 0, -1);
-        userProcesses = new ArrayList<Process>();
-        systemProcesses = new ArrayList<Process>();
+        userProcesses = new ArrayList<>();
+        systemProcesses = new ArrayList<>();
     }
 
     public void createProcess(Process process) {
