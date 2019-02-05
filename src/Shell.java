@@ -1,12 +1,21 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Shell {
     public static void main(String[] args) {
-        File inputFile = new File("input.txt");
+        File inputFile = new File("E:\\input.txt");
+        File outputFile = new File("E:\\output.txt");
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(outputFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         PriorityList priorityList = new PriorityList();
         ResourceList resourceList = new ResourceList();
         Process currentProcess = priorityList.nextProcess();
@@ -15,6 +24,8 @@ public class Shell {
         HashMap<String, Process> processMap = new HashMap<String, Process>();
         processMap.put(currentProcess.getPID(), currentProcess);
         boolean foundError = false;
+        boolean newSet = false;
+        boolean firstSet = true;
         try {
 
             Scanner scanner = new Scanner(inputFile);
@@ -28,6 +39,7 @@ public class Shell {
                     currentProcess = priorityList.nextProcess();
                     priorityList = new PriorityList();
                     resourceList = new ResourceList();
+                    newSet = true;
                 }
 
                 /*
@@ -49,13 +61,12 @@ public class Shell {
                         }
                         else {
                             foundError = true;
-                            System.out.println("error"); // error
                         }
                     } else {
                         foundError = true;
-                        System.out.println("error"); // error
                     }
                 }
+
                 /*
                 DE (DESTROY) COMMAND
                  */
@@ -93,7 +104,6 @@ public class Shell {
                         }
                     } else {
                         foundError = true;
-                        System.out.println("error");
                     }
                 }
 
@@ -121,9 +131,9 @@ public class Shell {
                     }
                     if (requestSuccess == false) {
                         foundError = true;
-                        System.out.println("error");
                     }
                 }
+
                 /*
                 REL (RELEASE) COMMAND
                  */
@@ -169,7 +179,6 @@ public class Shell {
                 else if (command.equals("to")) {
                     if (currentProcess == null) {
                         foundError = true;
-                        System.out.println("error");
                     } else {
                         priorityList.createProcess(currentProcess);
                         currentProcess = priorityList.nextProcess();
@@ -181,11 +190,38 @@ public class Shell {
                  */
                 else {
                     foundError = true;
-                    System.out.println("other error");
                 }
 
-                if (foundError == false) {
-                    System.out.println(currentProcess.getPID());
+                if (firstSet == true) {
+                    try {
+                        fileOutputStream.write("init ".getBytes());
+                        firstSet = false;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    if (newSet == true) {
+                        try {
+                            fileOutputStream.write("\ninit ".getBytes());
+                            newSet = false;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        if (foundError == false) {
+                            try {
+                                fileOutputStream.write((currentProcess.getPID() + " ").getBytes());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            try {
+                                fileOutputStream.write(("error" + " ").getBytes());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
