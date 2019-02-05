@@ -19,39 +19,23 @@ public class Process {
         this.creationTreeChildren = new ArrayList<>();
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public int getPriority() {
-        return this.priority;
-    }
-
-    public void setPID(String pid) {
-        this.processID = pid;
-    }
-
-    public String getPID() {
-        return this.processID;
-    }
-
     public ArrayList<Process> getCreationTreeChildren() {
-        return creationTreeChildren;
+        return this.creationTreeChildren;
     }
 
     public void addChild(Process process) {
-        creationTreeChildren.add(process);
+        this.creationTreeChildren.add(process);
     }
 
     public Process removeChild(Process process) {
         if (process == null) {
             return null;
         } else {
-            if (creationTreeChildren.remove(process) == true) {
+            if (this.creationTreeChildren.remove(process) == true) {
                 return process;
             } else {
                 ArrayList<Process> newChildren = new ArrayList<>();
-                newChildren.addAll(creationTreeChildren);
+                newChildren.addAll(this.creationTreeChildren);
                 for (int i = 0; i < newChildren.size(); i++) {
                     newChildren.addAll(newChildren.get(i).getCreationTreeChildren());
                 }
@@ -68,10 +52,26 @@ public class Process {
     }
 
     public void addResource(String resourceID) {
-        otherResources.add(resourceID);
+        this.otherResources.add(resourceID);
     }
 
     public void removeResource(String resourceID) {
-        otherResources.remove(resourceID);
+        this.otherResources.remove(resourceID);
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public int getPriority() {
+        return this.priority;
+    }
+
+    public void setPID(String pid) {
+        this.processID = pid;
+    }
+
+    public String getPID() {
+        return this.processID;
     }
 }

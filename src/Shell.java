@@ -192,6 +192,9 @@ public class Shell {
                     foundError = true;
                 }
 
+                /*
+                Kinda messy but this should print the output properly
+                 */
                 if (firstSet == true) {
                     try {
                         fileOutputStream.write("init ".getBytes());

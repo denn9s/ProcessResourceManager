@@ -7,21 +7,21 @@ public class ResourceList {
     Resource fourthResource;
 
     public ResourceList() {
-        firstResource = new Resource("R1", 1);
-        secondResource = new Resource("R2", 2);
-        thirdResource = new Resource("R3", 3);
-        fourthResource = new Resource("R4", 4);
+        this.firstResource = new Resource("R1", 1);
+        this.secondResource = new Resource("R2", 2);
+        this.thirdResource = new Resource("R3", 3);
+        this.fourthResource = new Resource("R4", 4);
     }
 
     public Resource getResource(String rid) {
         if (rid.equals("R1")) {
-            return firstResource;
+            return this.firstResource;
         } else if (rid.equals("R2")) {
-            return secondResource;
+            return this.secondResource;
         } else if (rid.equals("R3")) {
-            return thirdResource;
+            return this.thirdResource;
         } else if (rid.equals("R4")) {
-            return fourthResource;
+            return this.fourthResource;
         } else {
             return null;
         }

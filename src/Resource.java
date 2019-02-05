@@ -34,14 +34,14 @@ public class Resource {
     }
 
     public boolean release(Process process, int units) {
-        if (processUnitMap.containsKey(process)) {
-            int totalUsedUnits = processUnitMap.get(process);
-            if (units == totalUsedUnits && processList.remove(process) == true) {
-                this.freeUnits = this.freeUnits + processUnitMap.remove(process);
+        if (this.processUnitMap.containsKey(process)) {
+            int totalUsedUnits = this.processUnitMap.get(process);
+            if (units == totalUsedUnits && this.processList.remove(process) == true) {
+                this.freeUnits = this.freeUnits + this.processUnitMap.remove(process);
             } else {
-                processUnitMap.replace(process, totalUsedUnits - units);
+                this.processUnitMap.replace(process, totalUsedUnits - units);
                 totalUsedUnits = units;
-                freeUnits = freeUnits + totalUsedUnits;
+                this.freeUnits = this.freeUnits + totalUsedUnits;
             }
             return true;
         } else {
@@ -50,14 +50,14 @@ public class Resource {
     }
 
     public Process unblock() {
-        if (waitingList.isEmpty() == false) {
-            int currentUnits = processRequestMap.get(waitingList.get(0));
-            if (currentUnits <= freeUnits) {
-                Process process = waitingList.remove(0);
-                processList.add(process);
-                processUnitMap.put(process, currentUnits);
-                processRequestMap.remove(process);
-                freeUnits = freeUnits - currentUnits;
+        if (this.waitingList.isEmpty() == false) {
+            int currentUnits = this.processRequestMap.get(this.waitingList.get(0));
+            if (currentUnits <= this.freeUnits) {
+                Process process = this.waitingList.remove(0);
+                this.processList.add(process);
+                this.processUnitMap.put(process, currentUnits);
+                this.processRequestMap.remove(process);
+                this.freeUnits = this.freeUnits - currentUnits;
                 return process;
             }
         }
@@ -70,7 +70,7 @@ public class Resource {
             if (unitCount != null) {
                 this.freeUnits = this.freeUnits + unitCount;
             }
-            processRequestMap.remove(process);
+            this.processRequestMap.remove(process);
         }
         this.processList.removeAll(processList);
         this.waitingList.removeAll(processList);

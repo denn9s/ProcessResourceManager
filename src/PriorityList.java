@@ -7,37 +7,37 @@ public class PriorityList {
     ArrayList<Process> systemProcesses;
 
     public PriorityList() {
-        initProcess = new Process("init", null, 0, -1);
-        userProcesses = new ArrayList<>();
-        systemProcesses = new ArrayList<>();
+        this.initProcess = new Process("init", null, 0, -1);
+        this.userProcesses = new ArrayList<>();
+        this.systemProcesses = new ArrayList<>();
     }
 
     public void createProcess(Process process) {
         if (process.getPriority() == 0) {
-            initProcess = process;
+            this.initProcess = process;
         } else if (process.getPriority() == 1) {
-            userProcesses.add(process);
+            this.userProcesses.add(process);
         } else if (process.getPriority() == 2) {
-            systemProcesses.add(process);
+            this.systemProcesses.add(process);
         }
     }
 
     public void removeProcess(Process process) {
         if (process.getPriority() == 1) {
-            userProcesses.remove(process);
+            this.userProcesses.remove(process);
         } else if (process.getPriority() == 2) {
-            systemProcesses.remove(process);
+            this.systemProcesses.remove(process);
         }
     }
 
     public Process nextProcess() {
-        if (systemProcesses.size() > 0) {
-            Process systemProcess = systemProcesses.get(0);
-            systemProcesses.remove(0);
+        if (this.systemProcesses.size() > 0) {
+            Process systemProcess = this.systemProcesses.get(0);
+            this.systemProcesses.remove(0);
             return systemProcess;
-        } else if (userProcesses.size() > 0) {
-            Process userProcess = userProcesses.get(0);
-            userProcesses.remove(0);
+        } else if (this.userProcesses.size() > 0) {
+            Process userProcess = this.userProcesses.get(0);
+            this.userProcesses.remove(0);
             return userProcess;
         } else {
             return initProcess;
@@ -46,17 +46,17 @@ public class PriorityList {
 
     public int getSize(int priority) {
         if (priority == 1) {
-            return userProcesses.size();
+            return this.userProcesses.size();
         } else if (priority == 2) {
-            return systemProcesses.size();
+            return this.systemProcesses.size();
         } else {
             return -1;
         }
     }
 
     public int getCurrentPriority() {
-        if (systemProcesses.isEmpty() == true) {
-            if (userProcesses.isEmpty() == true) {
+        if (this.systemProcesses.isEmpty() == true) {
+            if (this.userProcesses.isEmpty() == true) {
                 return 0;
             }
             return 1;
